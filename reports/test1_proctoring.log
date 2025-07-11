@@ -1,0 +1,17 @@
+[18:58:24] INFO: ===== Starting Proctoring Session =====
+[18:58:24] INFO: Video: video_input/test2.mp4
+[18:58:56] WARNING: Partial face detected at : [00:00:22]
+[18:58:56] WARNING: Partial face detected at : [00:00:22]
+[18:58:57] WARNING: Partial face detected at : [00:00:23]
+[18:58:57] WARNING: Partial face detected at : [00:00:23]
+[18:58:57] ERROR: Phone detected at : [00:00:23]
+[18:58:58] WARNING: Partial face detected at : [00:00:23]
+[18:58:58] ERROR: Phone detected at : [00:00:23]
+[18:58:58] WARNING: Partial face detected at : [00:00:24]
+[18:58:58] ERROR: Phone detected at : [00:00:24]
+[18:58:59] WARNING: No face detected at : [00:00:24]
+[18:58:59] WARNING: No face detected at : [00:00:24]
+[18:59:00] WARNING: No face detected at : [00:00:25]
+[18:59:00] WARNING: No face detected at : [00:00:25]
+[18:59:01] WARNING: No face detected at : [00:00:25]
+[18:59:01] WARNING: No face detected at : [00:00:26]
