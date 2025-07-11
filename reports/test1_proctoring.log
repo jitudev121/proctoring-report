@@ -1,17 +1,34 @@
-[18:58:24] INFO: ===== Starting Proctoring Session =====
-[18:58:24] INFO: Video: video_input/test2.mp4
-[18:58:56] WARNING: Partial face detected at : [00:00:22]
-[18:58:56] WARNING: Partial face detected at : [00:00:22]
-[18:58:57] WARNING: Partial face detected at : [00:00:23]
-[18:58:57] WARNING: Partial face detected at : [00:00:23]
-[18:58:57] ERROR: Phone detected at : [00:00:23]
-[18:58:58] WARNING: Partial face detected at : [00:00:23]
-[18:58:58] ERROR: Phone detected at : [00:00:23]
-[18:58:58] WARNING: Partial face detected at : [00:00:24]
-[18:58:58] ERROR: Phone detected at : [00:00:24]
-[18:58:59] WARNING: No face detected at : [00:00:24]
-[18:58:59] WARNING: No face detected at : [00:00:24]
-[18:59:00] WARNING: No face detected at : [00:00:25]
-[18:59:00] WARNING: No face detected at : [00:00:25]
-[18:59:01] WARNING: No face detected at : [00:00:25]
-[18:59:01] WARNING: No face detected at : [00:00:26]
+[21:43:59] INFO: ===== Starting Proctoring Session =====
+[21:43:59] INFO: Video: video_input/test2.mp4
+[21:45:36] INFO: ===== Starting Proctoring Session =====
+[21:45:36] INFO: Video: video_input/test2.mp4
+[21:46:39] INFO: ===== Starting Proctoring Session =====
+[21:46:39] INFO: Video: video_input/test2.mp4
+[21:48:43] INFO: ===== Starting Proctoring Session =====
+[21:48:43] INFO: Video: video_input/test2.mp4
+[21:48:49] WARNING: Partial face started at [00:00:24] and ended at [00:00:26] (Duration: 0m 2s)
+[21:48:49] WARNING: Candidate looking away started at [00:00:24] and ended at [00:00:26] (Duration: 0m 2s)
+[21:48:49] WARNING: Phone usage started at [00:00:24] and ended at [00:00:26] (Duration: 0m 2s)
+[21:48:50] WARNING: Face not detected started at [00:00:26] and ended at [00:00:28] (Duration: 0m 2s)
+[21:48:52] WARNING: Partial face started at [00:00:34] and ended at [00:00:36] (Duration: 0m 2s)
+[21:48:53] WARNING: Multiple persons detected started at [00:00:40] and ended at [00:00:42] (Duration: 0m 2s)
+[21:48:54] WARNING: Face not detected started at [00:00:36] and ended at [00:00:46] (Duration: 0m 10s)
+[21:48:54] WARNING: Partial face started at [00:00:48] and ended at [00:00:50] (Duration: 0m 2s)
+[21:48:58] WARNING: Face not detected started at [00:01:02] and ended at [00:01:06] (Duration: 0m 4s)
+[21:48:58] WARNING: Partial face started at [00:01:06] and ended at [00:01:08] (Duration: 0m 2s)
+[21:48:59] WARNING: Face not detected started at [00:01:08] and ended at [00:01:10] (Duration: 0m 2s)
+[21:49:01] WARNING: Partial face started at [00:01:16] and ended at [00:01:18] (Duration: 0m 2s)
+[21:49:02] WARNING: Face not detected started at [00:01:18] and ended at [00:01:26] (Duration: 0m 8s)
+[21:49:03] WARNING: Partial face started at [00:01:26] and ended at [00:01:28] (Duration: 0m 2s)
+[21:49:04] WARNING: No person detected started at [00:01:28] and ended at [00:01:36] (Duration: 0m 8s)
+[21:49:05] WARNING: Face not detected started at [00:01:28] and ended at [00:01:42] (Duration: 0m 14s)
+[21:49:07] WARNING: Phone usage started at [00:01:48] and ended at [00:01:50] (Duration: 0m 2s)
+[21:49:08] WARNING: Face not detected started at [00:01:50] and ended at [00:01:54] (Duration: 0m 4s)
+[21:49:10] WARNING: Face not detected started at [00:01:58] and ended at [00:02:04] (Duration: 0m 6s)
+[21:49:10] WARNING: Phone usage started at [00:02:02] and ended at [00:02:04] (Duration: 0m 2s)
+[21:49:11] WARNING: Face not detected started at [00:02:06] and ended at [00:02:10] (Duration: 0m 4s)
+[21:49:11] WARNING: Phone usage started at [00:02:06] and ended at [00:02:10] (Duration: 0m 4s)
+[21:49:12] WARNING: Partial face started at [00:02:12] and ended at [00:02:14] (Duration: 0m 2s)
+[21:49:13] WARNING: Candidate looking away started at [00:02:14] and ended at [00:02:18] (Duration: 0m 4s)
+[21:49:21] INFO: ===== Proctoring Session Ended =====
+[21:49:21] WARNING: Face not detected started at [00:02:18] and ended at [00:02:54] (Duration: 0m 36s)

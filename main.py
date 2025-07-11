@@ -6,6 +6,8 @@ import warnings
 
 # Suppress FutureWarnings from PyTorch
 warnings.filterwarnings("ignore", category=FutureWarning)
+from detectors.event_tracker import EventTracker
+
 
 # Import detectors
 from detectors.detect_face_visibility import is_face_visible
@@ -13,16 +15,6 @@ from detectors.detect_partial_face import is_partial_face
 from detectors.detect_looking_away_opencv import is_looking_away
 from detectors.detect_multiple_persons import detect_person_count_yolo
 from detectors.detect_phone_usage import detect_phone
-from detectors.detect_away_duration import AwayTracker
-from detectors.event_tracker import EventTracker
-
-# Trackers for different detection events
-partial_face_tracker = EventTracker("Partial face detected")
-looking_away_tracker = EventTracker("Candidate looking away")
-no_face_tracker = EventTracker("No face detected")
-phone_tracker = EventTracker("Phone detected", log_level="ERROR")
-multi_person_tracker = EventTracker("Multiple persons detected", log_level="ERROR")
-
 
 # Setup logger
 def setup_logger(log_file='reports/default.log'):
@@ -37,7 +29,7 @@ def setup_logger(log_file='reports/default.log'):
 
 # Paths
 VIDEO_PATH = "video_input/test2.mp4"
-LOG_PATH = "reports/test2_proctoring.log"
+LOG_PATH = "reports/test1_proctoring.log"
 
 logger = setup_logger(LOG_PATH)
 
@@ -46,10 +38,20 @@ logger.info(f"Video: {VIDEO_PATH}")
 
 cap = cv2.VideoCapture(VIDEO_PATH)
 fps = cap.get(cv2.CAP_PROP_FPS)
-frame_count = 0
-away_tracker = AwayTracker()
 
-frame_interval = int(fps)  # ✔ Check every 10 seconds
+frame_count = 0
+
+frame_interval = int(fps*2)  # ✔ Check every 10 seconds
+
+# Create event trackers
+trackers = {
+    "no_face": EventTracker("Face not detected"),
+    "partial_face": EventTracker("Partial face"),
+    "looking_away": EventTracker("Candidate looking away"),
+    "multiple_persons": EventTracker("Multiple persons detected"),
+    "no_person": EventTracker("No person detected"),
+    "phone": EventTracker("Phone usage")
+}
 
 while True:
     ret, frame = cap.read()
@@ -63,45 +65,28 @@ while True:
         continue
 
     timestamp = frame_count / fps
-    frame_time_obj = datetime.utcfromtimestamp(timestamp)
-    frame_time_str = frame_time_obj.strftime('%H:%M:%S')
+    frame_time = datetime.utcfromtimestamp(timestamp).strftime('%H:%M:%S')
 
     # Run detectors
     face_visible = is_face_visible(frame)
     partial_face = is_partial_face(frame)
     looking_away = is_looking_away(frame)
+    # multi_person = detect_multiple_faces_yolo(frame)
     phone_visible = detect_phone(frame)
     person_count = detect_person_count_yolo(frame)
 
-    # Track & log away-return events
-    just_returned = away_tracker.update(face_visible, frame_time_obj)
-    if just_returned:
-        start, end, duration = just_returned
-        logger.warning(
-            f"Candidate was away from screen from {start.strftime('%H:%M:%S')} to {end.strftime('%H:%M:%S')} — duration: {str(duration)}"
-        )
+    trackers["no_face"].update(not face_visible, timestamp, logger)
+    trackers["partial_face"].update(partial_face, timestamp, logger)
+    trackers["looking_away"].update(looking_away, timestamp, logger)
+    trackers["phone"].update(phone_visible, timestamp, logger)
+    trackers["multiple_persons"].update(person_count > 1, timestamp, logger)
+    trackers["no_person"].update(person_count < 1, timestamp, logger)
 
-    # Logging detections
-    if not face_visible:
-        logger.warning(f"No face detected at : [{frame_time_str}]")
-    elif partial_face:
-        logger.warning(f"Partial face detected at : [{frame_time_str}]")
-    elif looking_away:
-        logger.warning(f"Candidate looking away at : [{frame_time_str}]")
 
-    if person_count > 1:
-        logger.error(f"Multiple persons detected: {person_count} at : [{frame_time_str}]")
-    elif person_count < 1:
-        logger.warning(f"No person detected at : [{frame_time_str}]")
-
-    if phone_visible:
-        logger.error(f"Phone detected at : [{frame_time_str}]")
-
-# Finalize any ongoing away status
-away_tracker.finalize(frame_time_obj)
-
-logger.info(f"Total away-from-screen time: {str(away_tracker.get_total_away_time())}")
 logger.info("===== Proctoring Session Ended =====")
 
+final_time = frame_count / fps
+for tracker in trackers.values():
+    tracker.finalize(logger, final_time)
 cap.release()
-print(f"✅ Log saved at: {LOG_PATH}")
+print(f" Log saved at: {LOG_PATH}")
