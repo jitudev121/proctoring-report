@@ -29,7 +29,7 @@ def setup_logger(log_file='reports/default.log'):
 
 # Paths
 VIDEO_PATH = "video_input/test2.mp4"
-LOG_PATH = "reports/test1_proctoring.log"
+LOG_PATH = "reports/test2_proctoring.log"
 
 logger = setup_logger(LOG_PATH)
 
@@ -41,7 +41,7 @@ fps = cap.get(cv2.CAP_PROP_FPS)
 
 frame_count = 0
 
-frame_interval = int(fps*2)  # ✔ Check every 10 seconds
+frame_interval = int(fps)  
 
 # Create event trackers
 trackers = {
@@ -60,7 +60,6 @@ while True:
 
     frame_count += 1
 
-    # Only process every 10 seconds
     if frame_count % frame_interval != 0:
         continue
 
@@ -79,8 +78,18 @@ while True:
     trackers["partial_face"].update(partial_face, timestamp, logger)
     trackers["looking_away"].update(looking_away, timestamp, logger)
     trackers["phone"].update(phone_visible, timestamp, logger)
-    trackers["multiple_persons"].update(person_count > 1, timestamp, logger)
-    trackers["no_person"].update(person_count < 1, timestamp, logger)
+    trackers["multiple_persons"].update(
+        person_count > 1,
+        timestamp,
+        logger,
+        extra_info=f"Person count: {person_count}"
+    )
+    trackers["no_person"].update(
+        person_count < 1,
+        timestamp,
+        logger,
+        extra_info=f"Person count: {person_count}"
+    )
 
 
 logger.info("===== Proctoring Session Ended =====")
