@@ -33,7 +33,7 @@ LOG_PATH = "reports/test2_proctoring.log"
 
 logger = setup_logger(LOG_PATH)
 
-logger.info("===== Starting Proctoring Session =====")
+logger.info("===== Starting Proctoring Session using mediapipe =====")
 logger.info(f"Video: {VIDEO_PATH}")
 
 cap = cv2.VideoCapture(VIDEO_PATH)

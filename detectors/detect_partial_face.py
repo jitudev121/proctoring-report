@@ -1,16 +1,27 @@
 import cv2
+import mediapipe as mp
 
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+mp_face_detection = mp.solutions.face_detection
 
 def is_partial_face(frame, min_visibility_ratio=0.15):
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
-    height, width = frame.shape[:2]
-    frame_area = height * width
+    with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5) as face_detection:
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        results = face_detection.process(frame_rgb)
 
-    for (x, y, w, h) in faces:
-        face_area = w * h
-        visibility_ratio = face_area / frame_area
-        if visibility_ratio < min_visibility_ratio:
-            return True
+        if not results.detections:
+            return False
+
+        height, width = frame.shape[:2]
+        frame_area = height * width
+
+        for detection in results.detections:
+            bbox = detection.location_data.relative_bounding_box
+            face_width = int(bbox.width * width)
+            face_height = int(bbox.height * height)
+            face_area = face_width * face_height
+
+            visibility_ratio = face_area / frame_area
+
+            if visibility_ratio < min_visibility_ratio:
+                return True
     return False
