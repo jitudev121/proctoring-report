@@ -1,16 +1,19 @@
+from ultralytics import YOLO
+import cv2
 
-import torch
-import os
-
-# Load YOLO model once
-yolo_path = os.path.abspath("yolov5")  # Adjust if needed
-model = torch.hub.load(yolo_path, 'yolov5s', source='local')
-model.classes = [0]  # Only detect 'person'
+# Load YOLOv8 model (e.g., yolov8n.pt or yolov8s.pt)
+model = YOLO("yolov8n.pt")  # Use 'yolov8n.pt' for speed or 'yolov8s.pt' for better accuracy
 
 def detect_person_count_yolo(frame):
-    results = model(frame, size=416)  # smaller size = faster
+    # Run YOLOv8 inference
+    results = model.predict(source=frame, imgsz=416, conf=0.5, verbose=False)
+
+    # Get number of people detected
     count = 0
-    for *box, conf, cls in results.xyxy[0]:
-        if int(cls) == 0:  # 0 = person
-            count += 1
+    for result in results:
+        boxes = result.boxes
+        for box in boxes:
+            cls_id = int(box.cls[0])
+            if cls_id == 0:  # 0 = person in COCO
+                count += 1
     return count

@@ -1,0 +1,40 @@
+
+
+[21:58:27] INFO: ===== Starting Proctoring Session using YOLOV8 with mediapipe =====
+[21:58:27] INFO: Video: video_input/test2.mp4
+[21:58:33] WARNING: Partial face started at [00:00:25] and ended at [00:00:26] (Duration: 0m 1s)                                    Correct
+[21:58:33] WARNING: Phone usage started at [00:00:26] and ended at [00:00:27] (Duration: 0m 1s)                                     Incorrect
+[21:58:33] WARNING: Candidate looking away started at [00:00:24] and ended at [00:00:28] (Duration: 0m 4s)                          Correct              
+[21:58:35] WARNING: Partial face started at [00:00:34] and ended at [00:00:39] (Duration: 0m 5s)                                    Correct
+[21:58:36] WARNING: Multiple persons detected started at [00:00:40] and ended at [00:00:41] (Duration: 0m 1s) | Person count: 2     Incorrect
+[21:58:37] WARNING: Face not detected started at [00:00:39] and ended at [00:00:44] (Duration: 0m 5s)                               Incorrect
+[21:58:38] WARNING: Partial face started at [00:00:44] and ended at [00:00:51] (Duration: 0m 7s)                                    Incorrect
+[21:58:42] WARNING: Candidate looking away started at [00:01:06] and ended at [00:01:08] (Duration: 0m 2s)                          Correct
+[21:58:42] WARNING: Partial face started at [00:01:08] and ended at [00:01:09] (Duration: 0m 1s)                                    Incorrect
+[21:58:45] WARNING: Partial face started at [00:01:16] and ended at [00:01:22] (Duration: 0m 6s)                                    90% correct
+[21:58:45] WARNING: Candidate looking away started at [00:01:24] and ended at [00:01:25] (Duration: 0m 1s)                          Correct
+[21:58:45] WARNING: Partial face started at [00:01:26] and ended at [00:01:27] (Duration: 0m 1s)                                    Correct
+[21:58:47] WARNING: Face not detected started at [00:01:27] and ended at [00:01:34] (Duration: 0m 7s)                               Correct
+[21:58:47] WARNING: No person detected started at [00:01:28] and ended at [00:01:35] (Duration: 0m 7s) | Person count: 0            Correct
+[21:58:47] WARNING: Candidate looking away started at [00:01:35] and ended at [00:01:36] (Duration: 0m 1s)                          Correct
+[21:58:47] WARNING: Partial face started at [00:01:35] and ended at [00:01:37] (Duration: 0m 2s)                                    Incorrect  
+[21:58:49] WARNING: Phone usage started at [00:01:43] and ended at [00:01:44] (Duration: 0m 1s)                                     Incorrect 
+[21:58:50] WARNING: Phone usage started at [00:01:49] and ended at [00:01:50] (Duration: 0m 1s)                                     Incorrect
+[21:58:50] WARNING: Phone usage started at [00:01:51] and ended at [00:01:54] (Duration: 0m 3s)                                     Incorrect  
+[21:58:52] WARNING: Partial face started at [00:02:00] and ended at [00:02:03] (Duration: 0m 3s)                                    Correct
+[21:58:52] WARNING: Phone usage started at [00:01:56] and ended at [00:02:03] (Duration: 0m 7s)                                     Incorrect
+[21:58:53] WARNING: Partial face started at [00:02:05] and ended at [00:02:06] (Duration: 0m 1s)                                    Incorrect
+[21:58:53] WARNING: Phone usage started at [00:02:05] and ended at [00:02:07] (Duration: 0m 2s)                                     Incorrect 
+[21:58:54] WARNING: Phone usage started at [00:02:12] and ended at [00:02:13] (Duration: 0m 1s)                                     Inorrect
+[21:58:55] WARNING: Partial face started at [00:02:18] and ended at [00:02:21] (Duration: 0m 3s)                                    Correct
+[21:58:55] WARNING: Candidate looking away started at [00:02:15] and ended at [00:02:21] (Duration: 0m 6s)                          Incorrect
+[21:58:57] WARNING: Face not detected started at [00:02:21] and ended at [00:02:28] (Duration: 0m 7s)                               Correct
+[21:58:57] WARNING: Partial face started at [00:02:28] and ended at [00:02:31] (Duration: 0m 3s)                                    Correct
+[21:58:57] WARNING: Candidate looking away started at [00:02:28] and ended at [00:02:31] (Duration: 0m 3s)                          Correct
+[21:58:57] WARNING: Face not detected started at [00:02:31] and ended at [00:02:32] (Duration: 0m 1s)                               Incorrect
+[21:58:58] WARNING: Partial face started at [00:02:32] and ended at [00:02:36] (Duration: 0m 4s)                                    Incorrect
+[21:58:59] WARNING: Candidate looking away started at [00:02:32] and ended at [00:02:38] (Duration: 0m 6s)                          Incorrect
+[21:59:02] INFO: ===== Proctoring Session Ended =====
+
+
+Accuracy percentage of YOLOV8 with mediapipe: 46.71
