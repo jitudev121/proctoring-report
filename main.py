@@ -13,7 +13,7 @@ from detectors.event_tracker import EventTracker
 from detectors.detect_face_visibility import is_face_visible
 from detectors.detect_partial_face import is_partial_face
 from detectors.detect_looking_away_opencv import is_looking_away
-from detectors.detect_multiple_persons import detect_person_count_yolo
+from detectors.detect_multiple_persons import detect_person_count
 from detectors.detect_phone_usage import detect_phone
 
 # Setup logger
@@ -33,7 +33,7 @@ LOG_PATH = "reports/test2_proctoring.log"
 
 logger = setup_logger(LOG_PATH)
 
-logger.info("===== Starting Proctoring Session using YOLOV8 with mediapipe including number of peoper count =====")
+logger.info("===== Starting Proctoring Session using detectron2 by facebook =====")
 logger.info(f"Video: {VIDEO_PATH}")
 
 cap = cv2.VideoCapture(VIDEO_PATH)
@@ -72,7 +72,7 @@ while True:
     looking_away = is_looking_away(frame)
     # multi_person = detect_multiple_faces_yolo(frame)
     phone_visible = detect_phone(frame)
-    person_count = detect_person_count_yolo(frame)
+    person_count = detect_person_count(frame)
 
     trackers["no_face"].update(not face_visible, timestamp, logger)
     trackers["partial_face"].update(partial_face, timestamp, logger)

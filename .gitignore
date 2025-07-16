@@ -1,1 +1,5 @@
 detectron2
+video_input/
+venv38
+automl
+__pycache__/

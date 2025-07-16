@@ -1,17 +1,22 @@
-from ultralytics import YOLO
+import cv2
+from detectron2.engine import DefaultPredictor
+from detectron2.config import get_cfg
+from detectron2 import model_zoo
 
-# Load the YOLOv8 model (you can use 'yolov8n.pt', 'yolov8s.pt', etc.)
-model = YOLO("yolov8n.pt")  # Make sure this file is downloaded or use a path/url
+# Setup Detectron2 predictor
+cfg = get_cfg()
+cfg.merge_from_file(model_zoo.get_config_file(
+    "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"
+))
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5
+cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(
+    "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"
+)
+cfg.MODEL.DEVICE = "cpu"  # or "cuda" if using GPU
+
+predictor = DefaultPredictor(cfg)
 
 def detect_phone(frame):
-    results = model.predict(frame, verbose=False)
-
-    for result in results:
-        boxes = result.boxes
-        classes = boxes.cls.cpu().tolist()
-
-        # 67 is the COCO class ID for 'cell phone'
-        if 67 in map(int, classes):
-            return True
-
-    return False
+    outputs = predictor(frame)
+    classes = outputs["instances"].pred_classes.tolist()
+    return 67 in classes  # 67 is class ID for cell phone

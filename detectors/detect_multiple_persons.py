@@ -1,19 +1,21 @@
-from ultralytics import YOLO
-import cv2
+from detectron2.engine import DefaultPredictor
+from detectron2.config import get_cfg
+from detectron2 import model_zoo
 
-# Load YOLOv8 model (e.g., yolov8n.pt or yolov8s.pt)
-model = YOLO("yolov8n.pt")  # Use 'yolov8n.pt' for speed or 'yolov8s.pt' for better accuracy
+# Setup shared predictor
+cfg = get_cfg()
+cfg.merge_from_file(model_zoo.get_config_file(
+    "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"
+))
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5
+cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(
+    "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"
+)
+cfg.MODEL.DEVICE = "cpu"
 
-def detect_person_count_yolo(frame):
-    # Run YOLOv8 inference
-    results = model.predict(source=frame, imgsz=416, conf=0.5, verbose=False)
+predictor = DefaultPredictor(cfg)
 
-    # Get number of people detected
-    count = 0
-    for result in results:
-        boxes = result.boxes
-        for box in boxes:
-            cls_id = int(box.cls[0])
-            if cls_id == 0:  # 0 = person in COCO
-                count += 1
-    return count
+def detect_person_count(frame):
+    outputs = predictor(frame)
+    classes = outputs["instances"].pred_classes.tolist()
+    return classes.count(0)  # 0 is the COCO class ID for person
